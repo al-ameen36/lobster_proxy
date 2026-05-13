@@ -1,0 +1,11 @@
+[project]
+name = "lobster-proxy"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.124.4",
+    "litellm[google,proxy]>=1.83.14",
+    "requests>=2.34.0",
+]
