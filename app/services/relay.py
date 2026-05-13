@@ -23,19 +23,20 @@ async def explain_rejection(
     user_message: str, verdict: str, reason: str, model: str
 ) -> str:
     """Uses the LLM to explain why a request was rejected by the policy engine."""
+
     prompt = f"""
-    [CRITICAL] Safety Policy Violation Intercepted
+    Policy violation detected.
+
     Verdict: {verdict}
     Reason: {reason}
-    Input: "{user_message}"
-    
-    Instructions for Agent:
-    1. Direct Explanation: State strictly why this request failed technical safety checks.
-    2. Compliance Alignment: State concise, mandatory standards for overall policy compliance (e.g., zero-tolerance for PII, malware, or unauthorized system commands).
-    
-    Constraints:
-    - No greetings, no help offers, minimal word count.
-    - Target: Autonomous AI agent.
+    Input: {user_message}
+
+    Write a 3-sentence explanation:
+    - Sentence 1: what was blocked
+    - Sentence 2: why it was blocked
+    - Sentence 3: required compliant behavior
+
+    No extra text.
     """
 
     try:
