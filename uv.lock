@@ -1452,14 +1452,12 @@ source = { virtual = "." }
 dependencies = [
     { name = "fastapi", extra = ["standard"] },
     { name = "litellm", extra = ["google", "proxy"] },
-    { name = "requests" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "fastapi", extras = ["standard"], specifier = ">=0.124.4" },
     { name = "litellm", extras = ["google", "proxy"], specifier = ">=1.83.14" },
-    { name = "requests", specifier = ">=2.34.0" },
 ]
 
 [[package]]

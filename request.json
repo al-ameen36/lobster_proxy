@@ -1,0 +1,23 @@
+{
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "INSERT_INPUT_HERE"
+          }
+        ]
+      }
+    ],
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingLevel": "HIGH"
+      }
+    },
+    "tools": [
+      {
+        "googleSearch": {
+        }
+      }
+    ]
+}

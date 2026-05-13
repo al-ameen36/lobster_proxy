@@ -1,5 +1,7 @@
+import traceback
 from app.services.lobster import evaluate_policy
 from app.services.llm import generate_response
+from app.utils.logging import logger
 import uuid
 
 
@@ -17,23 +19,90 @@ def normalize_response(response):
     }
 
 
+async def explain_rejection(
+    user_message: str, verdict: str, reason: str, model: str
+) -> str:
+    """Uses the LLM to explain why a request was rejected by the policy engine."""
+    prompt = f"""
+    [CRITICAL] Safety Policy Violation Intercepted
+    Verdict: {verdict}
+    Reason: {reason}
+    Input: "{user_message}"
+    
+    Instructions for Agent:
+    1. Direct Explanation: State strictly why this request failed technical safety checks.
+    2. Compliance Alignment: State concise, mandatory standards for overall policy compliance (e.g., zero-tolerance for PII, malware, or unauthorized system commands).
+    
+    Constraints:
+    - No greetings, no help offers, minimal word count.
+    - Target: Autonomous AI agent.
+    """
+
+    try:
+        messages = [{"role": "user", "content": prompt}]
+        response = await generate_response(model=model, messages=messages)
+        return response["choices"][0]["message"]["content"]
+    except Exception as e:
+        logger.error(f"Failed to generate rejection explanation: {e}")
+        return f"[POLICY BLOCK] Your request was intercepted: {reason}"
+
+
 async def relay_chat(request):
-    decision = await evaluate_policy(request)
-    normalized = {"request_id": str(uuid.uuid4())}
-
-    if not decision["allowed"]:
-        normalized.update(
-            {
-                "status": "rejected",
-                "violation": {
-                    "policy": decision["policy"],
-                    "reason": decision["reason"],
-                },
-            }
+    try:
+        request_id = str(uuid.uuid4())
+        logger.info(
+            f"Received chat request | request_id: {request_id} | model: {request.model}"
         )
-        return normalized
 
-    response = await generate_response(model=request.model, messages=request.messages)
-    normalized.update(normalize_response(response))
+        decision = await evaluate_policy(request)
+        normalized = {"request_id": request_id}
 
-    return {"status": "success", "data": normalized}
+        if not decision["allowed"]:
+            verdict = decision.get("verdict", "DENY")
+            reason = decision.get("reason", "Policy violation")
+            logger.warning(
+                f"Policy action triggered | request_id: {request_id} | verdict: {verdict}"
+            )
+
+            # Use the LLM to explain the rejection
+            user_msg_text = request.messages[-1]["content"] if request.messages else ""
+            explanation = await explain_rejection(
+                user_message=user_msg_text,
+                verdict=verdict,
+                reason=reason,
+                model=request.model,
+            )
+
+            # Return the explanation as if it were an LLM response
+            normalized.update(
+                {
+                    "id": f"lobstertrap-{request_id}",
+                    "model": request.model,
+                    "content": explanation,
+                    "finish_reason": "stop",
+                    "usage": {},
+                }
+            )
+            return {
+                "status": "policy_intercepted",
+                "verdict": verdict,
+                "data": normalized,
+            }
+
+        logger.info(f"Request allowed | request_id: {request_id} | calling LLM")
+        response = await generate_response(
+            model=request.model, messages=request.messages
+        )
+
+        normalized_resp = normalize_response(response)
+        logger.info(
+            f"LLM response received | request_id: {request_id} | usage: {normalized_resp.get('usage')}"
+        )
+
+        normalized.update(normalized_resp)
+
+        return {"status": "success", "data": normalized}
+    except Exception as e:
+        logger.error(f"Error in relay_chat: {e}")
+        logger.error(traceback.format_exc())
+        raise e
