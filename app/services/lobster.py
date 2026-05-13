@@ -13,22 +13,27 @@ async def evaluate_policy(request):
                 f"{LOBSTER_TRAP_URL}/v1/chat/completions",
                 json={
                     "model": request.model,
-                    "messages": [msg.dict() if hasattr(msg, "dict") else msg for msg in request.messages],
+                    "messages": [
+                        msg.dict() if hasattr(msg, "dict") else msg
+                        for msg in request.messages
+                    ],
                 },
-                timeout=10.0
+                timeout=8.0,
             )
             response.raise_for_status()
             data = response.json()
-            
+
             lt_meta = data.get("_lobstertrap", {})
             verdict = lt_meta.get("verdict", "ALLOW")
-            
+            reason = lt_meta.get("reason", "")
+
             logger.info(f"Lobstertrap verdict: {verdict}")
-            
+
             return {
                 "allowed": verdict == "ALLOW",
                 "verdict": verdict,
-                "data": data
+                "reason": reason,
+                "data": data,
             }
         except Exception as e:
             logger.error(f"Error calling Lobstertrap: {e}")

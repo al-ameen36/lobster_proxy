@@ -1,6 +1,7 @@
 import traceback
 from app.services.lobster import evaluate_policy
 from app.services.llm import generate_response
+from app.services.persistence import log_interaction
 from app.utils.logging import logger
 import uuid
 
@@ -51,22 +52,21 @@ async def explain_rejection(
 async def relay_chat(request):
     try:
         request_id = str(uuid.uuid4())
+        user_msg_text = request.messages[-1]["content"] if request.messages else ""
         logger.info(
             f"Received chat request | request_id: {request_id} | model: {request.model}"
         )
 
         decision = await evaluate_policy(request)
-        normalized = {"request_id": request_id}
+        verdict = decision["verdict"]
+        reason = decision.get("reason", "")
 
         if not decision["allowed"]:
-            verdict = decision.get("verdict", "DENY")
-            reason = decision.get("reason", "Policy violation")
             logger.warning(
                 f"Policy action triggered | request_id: {request_id} | verdict: {verdict}"
             )
 
             # Use the LLM to explain the rejection
-            user_msg_text = request.messages[-1]["content"] if request.messages else ""
             explanation = await explain_rejection(
                 user_message=user_msg_text,
                 verdict=verdict,
@@ -74,20 +74,26 @@ async def relay_chat(request):
                 model=request.model,
             )
 
-            # Return the explanation as if it were an LLM response
-            normalized.update(
-                {
+            await log_interaction(
+                request_id=request_id,
+                model=request.model,
+                user_message=user_msg_text,
+                verdict=verdict,
+                policy_reason=reason,
+                final_response=explanation
+            )
+
+            return {
+                "status": "policy_intercepted",
+                "verdict": verdict,
+                "data": {
+                    "request_id": request_id,
                     "id": f"lobstertrap-{request_id}",
                     "model": request.model,
                     "content": explanation,
                     "finish_reason": "stop",
                     "usage": {},
                 }
-            )
-            return {
-                "status": "policy_intercepted",
-                "verdict": verdict,
-                "data": normalized,
             }
 
         logger.info(f"Request allowed | request_id: {request_id} | calling LLM")
@@ -100,10 +106,40 @@ async def relay_chat(request):
             f"LLM response received | request_id: {request_id} | usage: {normalized_resp.get('usage')}"
         )
 
-        normalized.update(normalized_resp)
+        # Persist the successful interaction
+        meta = {"usage": normalized_resp.get("usage")}
+        await log_interaction(
+            request_id=request_id,
+            model=request.model,
+            user_message=user_msg_text,
+            verdict=verdict,
+            policy_reason=reason,
+            final_response=normalized_resp["content"],
+            metadata=meta
+        )
 
-        return {"status": "success", "data": normalized}
+        final_data = {"request_id": request_id}
+        final_data.update(normalized_resp)
+
+        return {"status": "success", "data": final_data}
     except Exception as e:
-        logger.error(f"Error in relay_chat: {e}")
+        logger.error(f"Error in relay_chat for {request_id}: {e}")
         logger.error(traceback.format_exc())
-        raise e
+        
+        # Log the error interaction
+        try:
+            await log_interaction(
+                request_id=request_id,
+                model=request.model,
+                user_message=user_msg_text,
+                verdict="ERROR",
+                policy_reason=str(e),
+                final_response=f"Error: {str(e)}"
+            )
+        except:
+            pass
+
+        return {
+            "status": "error",
+            "message": "The upstream LLM service is currently unavailable or returned an error."
+        }
