@@ -1,6 +1,7 @@
 import os
 import httpx
 from app.utils.logging import logger
+import litellm
 
 LOBSTER_TRAP_URL = os.environ.get("LOBSTER_TRAP_URL", "http://localhost:8080")
 
@@ -35,7 +36,19 @@ async def evaluate_policy(request):
                 "reason": reason,
                 "data": data,
             }
+        except litellm.Timeout as e:
+            logger.error("Request timed out calling llm")
+            # Fail closed or open? Let's fail open for now but log it.
+            return {
+                "allowed": True,
+                "verdict": verdict,
+                "reason": "Request timed out calling llm",
+            }
         except Exception as e:
             logger.error(f"Error calling Lobstertrap: {e}")
             # Fail closed or open? Let's fail open for now but log it.
-            return {"allowed": True, "verdict": "ERROR", "reason": str(e)}
+            return {
+                "allowed": True,
+                "verdict": "ERROR",
+                "reason": "Error calling Lobstertrap",
+            }

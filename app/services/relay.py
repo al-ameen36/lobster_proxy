@@ -74,13 +74,17 @@ async def relay_chat(request):
                 model=request.model,
             )
 
+            # Capture metadata for logging
+            lt_meta = decision.get("data", {}).get("_lobstertrap", {})
+            
             await log_interaction(
                 request_id=request_id,
                 model=request.model,
                 user_message=user_msg_text,
                 verdict=verdict,
                 policy_reason=reason,
-                final_response=explanation
+                final_response=explanation,
+                metadata=lt_meta
             )
 
             return {
@@ -106,8 +110,10 @@ async def relay_chat(request):
             f"LLM response received | request_id: {request_id} | usage: {normalized_resp.get('usage')}"
         )
 
-        # Persist the successful interaction
-        meta = {"usage": normalized_resp.get("usage")}
+        # Persist the successful interaction with full Lobstertrap metadata
+        lt_meta = decision.get("data", {}).get("_lobstertrap", {})
+        lt_meta["usage"] = normalized_resp.get("usage")
+        
         await log_interaction(
             request_id=request_id,
             model=request.model,
@@ -115,7 +121,7 @@ async def relay_chat(request):
             verdict=verdict,
             policy_reason=reason,
             final_response=normalized_resp["content"],
-            metadata=meta
+            metadata=lt_meta
         )
 
         final_data = {"request_id": request_id}
