@@ -1,12 +1,14 @@
 import httpx
+import os
 
 MODEL = "meta-llama/Llama-3.3-70B-Instruct"
+LOBSTER_PROXY_URL = os.environ.get("LOBSTER_PROXY_URL", "")
 
 
 def main():
     try:
         with httpx.Client(timeout=60.0) as client:
-            url = "http://localhost:8000/v1/chat/completions"
+            url = f"{LOBSTER_PROXY_URL}/v1/chat/completions"
 
             # 1. Test Neutral Request (Should pass to LLM)
             payload_success = {

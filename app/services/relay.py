@@ -12,12 +12,18 @@ from app.utils.logging import logger
 def normalize_response(response):
     choice = response["choices"][0]
     message = choice["message"]
+    usage = response.get("usage", {})
+    # LiteLLM returns a Usage object — convert to plain dict for JSON serialization
+    if hasattr(usage, "model_dump"):
+        usage = usage.model_dump()
+    elif hasattr(usage, "dict"):
+        usage = usage.dict()
     return {
         "id": response["id"],
         "model": response["model"],
         "content": message["content"],
         "finish_reason": choice["finish_reason"],
-        "usage": response.get("usage", {}),
+        "usage": usage,
     }
 
 
