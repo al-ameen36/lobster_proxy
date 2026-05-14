@@ -28,7 +28,7 @@ Your App  ──►  Lobster Proxy (:8000)  ──►  Lobstertrap (:8080)
 
 ### Prerequisites
 
-- Python 3.11+
+- Python 3.12+
 - A running [Lobstertrap](https://github.com/Lobstertrap/lobstertrap) instance
 - An OpenAI-compatible LLM endpoint (e.g. Ollama, vLLM, Together AI, OpenAI)
 
@@ -37,8 +37,7 @@ Your App  ──►  Lobster Proxy (:8000)  ──►  Lobstertrap (:8080)
 ```bash
 git clone https://github.com/your-org/lobster-proxy
 cd lobster-proxy
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+uv sync
 ```
 
 ### Configure
@@ -48,10 +47,12 @@ Set environment variables before running:
 | Variable | Default | Description |
 |----------|---------|-------------|
 | `LOBSTER_TRAP_URL` | `http://localhost:8080` | URL of your Lobstertrap instance |
+| `LOBSTER_PROXY_URL` | `http://localhost:8000` | URL of this proxy server |
 | `LLM_API_BASE` | *(none)* | Base URL of your upstream LLM (e.g. `http://localhost:11434`) |
 
 ```bash
 export LOBSTER_TRAP_URL=http://localhost:8080
+export LOBSTER_PROXY_URL=http://localhost:8000
 export LLM_API_BASE=http://localhost:11434
 ```
 
