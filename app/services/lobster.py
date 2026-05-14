@@ -41,7 +41,7 @@ async def evaluate_policy(request):
             # Fail closed or open? Let's fail open for now but log it.
             return {
                 "allowed": True,
-                "verdict": verdict,
+                "verdict": "ERROR",
                 "reason": "Request timed out calling llm",
             }
         except Exception as e:

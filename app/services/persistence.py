@@ -5,10 +5,6 @@ from fastapi import WebSocket
 from typing import List
 
 logger = logging.getLogger(__name__)
-fh = logging.FileHandler("/tmp/proxy.log")
-fh.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(name)s: %(message)s"))
-logger.addHandler(fh)
-logger.setLevel(logging.INFO)
 
 
 # ── Connection Manager ────────────────────────────────────────────────────────
@@ -96,7 +92,9 @@ class LiveInteractionStore:
         s["total_requests"] += 1
 
         verdict = (interaction.get("verdict") or "ALLOW").upper()
-        if verdict == "ALLOW":
+        # Anything that isn't a clean ALLOW counts as blocked for stats purposes
+        ALLOWED_VERDICTS = {"ALLOW"}
+        if verdict in ALLOWED_VERDICTS:
             s["allowed_count"] += 1
         else:
             s["blocked_count"] += 1

@@ -279,9 +279,14 @@
       color: var(--amber);
     }
 
-    .badge-ingress {
-      background: rgba(76, 201, 240, 0.08);
-      color: var(--blue);
+    .badge-llm_timeout {
+      background: rgba(244, 162, 97, 0.15);
+      color: var(--amber);
+    }
+
+    .badge-llm_error {
+      background: rgba(230, 57, 70, 0.15);
+      color: var(--red);
     }
 
     .badge-egress {
@@ -428,409 +433,6 @@
       margin-top: 12px;
     }
 
-    /* ── Stats ── */
-    .stats-scroll {
-      flex: 1;
-      overflow: auto;
-      padding: 20px;
-    }
-
-    .stats-cards-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-    }
-
-    .stat-card.blue::before {
-      background: var(--blue);
-    }
-
-    .stat-card.red::before {
-      background: var(--red);
-    }
-
-    .stat-card.green::before {
-      background: var(--green);
-    }
-
-    .stat-card.amber::before {
-      background: var(--amber);
-    }
-
-    .stat-card .stat-label {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-
-    .stat-card .stat-value {
-      font-size: 32px;
-      font-weight: 700;
-      margin-top: 8px;
-      line-height: 1;
-    }
-
-    .stat-card .stat-value.green {
-      color: var(--green);
-    }
-
-    .stat-card .stat-value.red {
-      color: var(--red);
-    }
-
-    .stat-card .stat-value.blue {
-      color: var(--blue);
-    }
-
-    .stat-card .stat-value.amber {
-      color: var(--amber);
-    }
-
-    .stat-card .stat-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 6px;
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-
-    .stats-row.full {
-      grid-template-columns: 1fr;
-    }
-
-    .stats-panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px;
-    }
-
-    .stats-panel h3 {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .stats-panel h3 .panel-icon {
-      color: var(--text-muted);
-    }
-
-    .bar-chart {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .bar-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 12px;
-    }
-
-    .bar-label {
-      width: 120px;
-      min-width: 120px;
-      text-align: right;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-weight: 500;
-    }
-
-    .bar-track {
-      flex: 1;
-      height: 24px;
-      background: var(--bg);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .bar-fill {
-      height: 100%;
-      border-radius: 4px;
-      opacity: 0.85;
-    }
-
-    .bar-count {
-      width: 50px;
-      min-width: 50px;
-      text-align: right;
-      font-weight: 600;
-    }
-
-    .bar-pct {
-      width: 40px;
-      min-width: 40px;
-      text-align: right;
-      color: var(--text-muted);
-      font-size: 11px;
-    }
-
-    .timeline-chart {
-      display: flex;
-      align-items: flex-end;
-      gap: 1px;
-      height: 120px;
-      background: var(--bg);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .timeline-bar {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      min-width: 0;
-    }
-
-    .timeline-bar-ok {
-      background: var(--green);
-      opacity: 0.8;
-    }
-
-    .timeline-bar-blocked {
-      background: var(--red);
-      opacity: 0.8;
-    }
-
-    .timeline-legend {
-      display: flex;
-      gap: 16px;
-      margin-top: 10px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .timeline-legend span::before {
-      content: '';
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      border-radius: 2px;
-      margin-right: 5px;
-      vertical-align: middle;
-    }
-
-    .timeline-legend .leg-ok::before {
-      background: var(--green);
-    }
-
-    .timeline-legend .leg-blocked::before {
-      background: var(--red);
-    }
-
-    .histogram {
-      display: flex;
-      align-items: flex-end;
-      gap: 3px;
-      height: 100px;
-    }
-
-    .hist-col {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      min-width: 0;
-    }
-
-    .hist-bar {
-      width: 100%;
-      opacity: 0.8;
-      border-radius: 3px 3px 0 0;
-      min-height: 0;
-    }
-
-    .hist-bar.low {
-      background: var(--green);
-    }
-
-    .hist-bar.med {
-      background: var(--amber);
-    }
-
-    .hist-bar.high {
-      background: var(--red);
-    }
-
-    .hist-count {
-      font-size: 10px;
-      color: var(--text-muted);
-    }
-
-    .hist-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-top: 6px;
-    }
-
-    .rules-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-    }
-
-    .rules-table th {
-      text-align: left;
-      padding: 8px 12px;
-      color: var(--text-muted);
-      font-weight: 500;
-      border-bottom: 1px solid var(--border);
-      font-size: 11px;
-      text-transform: uppercase;
-    }
-
-    .rules-table td {
-      padding: 8px 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .rules-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .rules-table .rule-bar {
-      display: inline-block;
-      height: 6px;
-      border-radius: 3px;
-      background: var(--accent);
-      margin-right: 8px;
-      vertical-align: middle;
-      opacity: 0.7;
-    }
-
-    /* ── Policy ── */
-    .policy-section {
-      padding: 16px;
-    }
-
-    .policy-section h3 {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 12px;
-    }
-
-    .rule-accordion {
-      margin-bottom: 8px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      overflow: hidden;
-    }
-
-    .rule-header {
-      padding: 10px 14px;
-      background: var(--surface);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      user-select: none;
-    }
-
-    .rule-header:hover {
-      background: var(--surface2);
-    }
-
-    .rule-header .arrow {
-      color: var(--text-muted);
-      font-size: 10px;
-      transition: transform 0.2s;
-    }
-
-    .rule-header.expanded .arrow {
-      transform: rotate(90deg);
-    }
-
-    .rule-header .rule-name {
-      flex: 1;
-      font-weight: 500;
-    }
-
-    .rule-header .priority-badge {
-      padding: 1px 8px;
-      border-radius: 10px;
-      font-size: 11px;
-      font-weight: 600;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-    }
-
-    .rule-body {
-      padding: 0 14px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.25s ease, padding 0.25s ease;
-      background: var(--bg);
-    }
-
-    .rule-body.expanded {
-      padding: 12px 14px;
-      max-height: 500px;
-    }
-
-    .rule-body p {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .condition-list {
-      list-style: none;
-      font-size: 12px;
-    }
-
-    .condition-list li {
-      padding: 3px 0;
-    }
-
-    .condition-list li code {
-      background: var(--surface2);
-      padding: 1px 4px;
-      border-radius: 3px;
-      font-size: 11px;
-    }
-
-    .policy-meta {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 14px;
-      margin-bottom: 16px;
-      font-size: 12px;
-    }
 
     /* ── Empty state ── */
     .empty-state {
@@ -878,8 +480,6 @@
     </div>
     <ul class="sidebar-nav">
       <li class="active" data-view="feed">&#9654; Audit Log</li>
-      <li data-view="stats">&#9632; Statistics</li>
-      <li data-view="policy">&#9881; Policy</li>
     </ul>
     <div class="connection-status">
       <span class="status-dot disconnected" id="statusDot"></span>
@@ -926,498 +526,271 @@
       </div>
     </div>
 
-    <!-- Statistics -->
-    <div class="view" id="statsView">
-      <div class="stats-scroll">
-        <div class="stats-cards-row" id="statsCards"></div>
-        <div class="stats-row full">
-          <div class="stats-panel">
-            <h3><span class="panel-icon">&#9604;</span> Request Timeline (60 min)</h3>
-            <div class="timeline-chart" id="timelineChart"></div>
-            <div class="timeline-legend">
-              <span class="leg-ok">Allowed</span>
-              <span class="leg-blocked">Blocked</span>
-            </div>
-          </div>
-        </div>
-        <div class="stats-row">
-          <div class="stats-panel">
-            <h3><span class="panel-icon">&#9679;</span> Action Distribution</h3>
-            <div class="bar-chart" id="actionChart"></div>
-          </div>
-          <div class="stats-panel">
-            <h3><span class="panel-icon">&#9733;</span> Intent Distribution</h3>
-            <div class="bar-chart" id="intentChart"></div>
-          </div>
-        </div>
-        <div class="stats-row">
-          <div class="stats-panel">
-            <h3><span class="panel-icon">&#9650;</span> Risk Score Distribution</h3>
-            <div class="histogram" id="riskHistogram"></div>
-            <div class="hist-labels">
-              <span>0.0</span><span>0.1</span><span>0.2</span><span>0.3</span><span>0.4</span>
-              <span>0.5</span><span>0.6</span><span>0.7</span><span>0.8</span><span>0.9</span><span>1.0</span>
-            </div>
-          </div>
-          <div class="stats-panel">
-            <h3><span class="panel-icon">&#9776;</span> Top Triggered Rules</h3>
-            <table class="rules-table" id="topRulesTable">
-              <thead>
-                <tr>
-                  <th>Rule</th>
-                  <th style="width:60px;text-align:right">Count</th>
-                  <th style="width:50px"></th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-          </div>
-        </div>
+    <!-- Detail panel -->
+    <div class="detail-panel" id="detailPanel">
+      <div class="detail-header">
+        <h3 id="detailTitle">Event Details</h3>
+        <button class="detail-close" id="detailClose">&times;</button>
       </div>
+      <div class="detail-body" id="detailBody"></div>
     </div>
 
-    <!-- Policy -->
-    <div class="view" id="policyView">
-      <div style="overflow:auto;flex:1;">
-        <div class="policy-section" id="policyContent">
-          <div class="empty-state">
-            <div class="icon">&#9881;</div>
-            <div>No policy data available.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+    <script>
+      (function () {
+        'use strict';
 
-  <!-- Detail panel -->
-  <div class="detail-panel" id="detailPanel">
-    <div class="detail-header">
-      <h3 id="detailTitle">Event Details</h3>
-      <button class="detail-close" id="detailClose">&times;</button>
-    </div>
-    <div class="detail-body" id="detailBody"></div>
-  </div>
+        let events = [], ws = null;
+        let selectedEvent = null, actionFilter = '';
 
-  <script>
-    (function () {
-      'use strict';
+        const feedBody = document.getElementById('feedBody');
+        const feedWrap = document.getElementById('feedWrap');
+        const feedEmpty = document.getElementById('feedEmpty');
+        const feedToolbar = document.getElementById('feedToolbar');
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+        const actionFilterEl = document.getElementById('actionFilter');
+        const autoScrollEl = document.getElementById('autoScroll');
+        const eventCountEl = document.getElementById('eventCount');
+        const detailPanel = document.getElementById('detailPanel');
+        const detailBody = document.getElementById('detailBody');
 
-      let events = [], stats = null, policyData = null, ws = null;
-      let currentView = 'feed', selectedEvent = null, actionFilter = '';
+        actionFilterEl.addEventListener('change', () => { actionFilter = actionFilterEl.value; renderFeed(); });
+        document.getElementById('clearBtn').addEventListener('click', () => { events = []; renderFeed(); });
+        document.getElementById('detailClose').addEventListener('click', closeDetail);
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
 
-      const feedBody = document.getElementById('feedBody');
-      const feedWrap = document.getElementById('feedWrap');
-      const feedEmpty = document.getElementById('feedEmpty');
-      const feedToolbar = document.getElementById('feedToolbar');
-      const statusDot = document.getElementById('statusDot');
-      const statusText = document.getElementById('statusText');
-      const actionFilterEl = document.getElementById('actionFilter');
-      const autoScrollEl = document.getElementById('autoScroll');
-      const eventCountEl = document.getElementById('eventCount');
-      const detailPanel = document.getElementById('detailPanel');
-      const detailBody = document.getElementById('detailBody');
+        function closeDetail() {
+          detailPanel.classList.remove('open');
+          selectedEvent = null;
+          feedBody.querySelectorAll('tr.selected').forEach(r => r.classList.remove('selected'));
+        }
 
-      // ── Navigation ──
-      document.querySelectorAll('.sidebar-nav li').forEach(li => {
-        li.addEventListener('click', () => {
-          document.querySelectorAll('.sidebar-nav li').forEach(l => l.classList.remove('active'));
-          li.classList.add('active');
-          currentView = li.dataset.view;
-          document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-          document.getElementById(currentView + 'View').classList.add('active');
-          feedToolbar.style.display = currentView === 'feed' ? 'flex' : 'none';
-          if (currentView === 'stats') renderStats();
-          if (currentView === 'policy') renderPolicy();
-        });
-      });
+        // ── WebSocket ──
+        function connect() {
+          const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+          ws = new WebSocket(proto + '//' + location.hostname + ':8000/v1/ws');
 
-      actionFilterEl.addEventListener('change', () => { actionFilter = actionFilterEl.value; renderFeed(); });
-      document.getElementById('clearBtn').addEventListener('click', () => { events = []; renderFeed(); });
-      document.getElementById('detailClose').addEventListener('click', closeDetail);
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+          ws.onopen = () => {
+            statusDot.className = 'status-dot connected';
+            statusText.textContent = 'Connected';
+          };
+          ws.onclose = () => {
+            statusDot.className = 'status-dot disconnected';
+            statusText.textContent = 'Disconnected';
+            setTimeout(connect, 3000);
+          };
+          ws.onerror = () => ws.close();
 
-      function closeDetail() {
-        detailPanel.classList.remove('open');
-        selectedEvent = null;
-        feedBody.querySelectorAll('tr.selected').forEach(r => r.classList.remove('selected'));
-      }
-
-      // ── WebSocket ──
-      function connect() {
-        const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
-        const host = location.hostname + ':' + (location.port || '8000');
-        ws = new WebSocket(proto + '//' + host + '/v1/ws');
-
-        ws.onopen = () => {
-          statusDot.className = 'status-dot connected';
-          statusText.textContent = 'Connected';
-        };
-        ws.onclose = () => {
-          statusDot.className = 'status-dot disconnected';
-          statusText.textContent = 'Disconnected';
-          setTimeout(connect, 3000);
-        };
-        ws.onerror = () => ws.close();
-
-        ws.onmessage = e => {
-          try {
-            const msg = JSON.parse(e.data);
-            if (msg.type === 'ping') return;
-            if (msg.type === 'initial_state') {
-              events = msg.payload.events || [];
-              stats = msg.payload.stats;
-              policyData = msg.payload.policy;
-              renderFeed();
-              if (currentView === 'stats') renderStats();
-              if (currentView === 'policy') renderPolicy();
-            } else if (msg.type === 'event') {
-              const dup = events.some(ev => ev.request_id && ev.request_id === msg.payload.request_id);
-              if (!dup) {
-                events.push(msg.payload);
-                if (events.length > 500) events.shift();
-                appendFeedRow(msg.payload);
+          ws.onmessage = e => {
+            try {
+              const msg = JSON.parse(e.data);
+              if (msg.type === 'ping') return;
+              if (msg.type === 'initial_state') {
+                events = msg.payload.events || [];
+                renderFeed();
+              } else if (msg.type === 'event') {
+                const dup = events.some(ev => ev.request_id && ev.request_id === msg.payload.request_id);
+                if (!dup) {
+                  events.push(msg.payload);
+                  if (events.length > 500) events.shift();
+                  appendFeedRow(msg.payload);
+                }
+              } else if (msg.type === 'stats_update') {
+                // stats view removed — ignore
               }
-            } else if (msg.type === 'stats_update') {
-              stats = msg.payload;
-              if (currentView === 'stats') renderStats();
-            }
-          } catch (err) { console.error('WS parse error', err); }
-        };
-      }
-
-      // ── Feed rendering ──
-      function filteredEvents() {
-        const sorted = [...events].sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
-        return actionFilter ? sorted.filter(e => e.action === actionFilter) : sorted;
-      }
-
-      function renderFeed() {
-        feedBody.innerHTML = '';
-        const filtered = filteredEvents();
-        feedEmpty.style.display = filtered.length === 0 ? 'flex' : 'none';
-        feedWrap.style.display = filtered.length > 0 ? 'block' : 'none';
-        filtered.forEach(evt => appendFeedRow(evt, false));
-        updateEventCount();
-        if (autoScrollEl.checked) scrollFeed();
-      }
-
-      function appendFeedRow(evt, doScroll) {
-        if (actionFilter && evt.action !== actionFilter) return;
-
-        feedEmpty.style.display = 'none';
-        feedWrap.style.display = 'block';
-
-        const meta = evt.metadata || {};
-        const risk = resolveRisk(evt);
-        const riskColor = risk < 0.3 ? 'var(--green)' : risk < 0.6 ? 'var(--amber)' : 'var(--red)';
-
-        const ts = Number(evt.timestamp);
-        const time = new Date(ts > 1e12 ? ts : ts * 1000);
-        const timeStr = isNaN(time) ? '—' : time.toLocaleTimeString('en-US', { hour12: false });
-
-        const action = (evt.action || 'ALLOW').toUpperCase();
-        const model = (evt.model || '').split('/').pop().split(':')[0]; // shorten long model names
-
-        const tr = document.createElement('tr');
-        tr.innerHTML =
-          '<td>' + esc(timeStr) + '</td>' +
-          '<td><div class="truncate" style="max-width:80px;color:var(--text-muted)">' + esc(model) + '</div></td>' +
-          '<td><span class="badge badge-' + esc((evt.direction || 'ingress').toLowerCase()) + '">' + esc(evt.direction || 'ingress') + '</span></td>' +
-          '<td><span class="badge badge-' + esc(action.toLowerCase()) + '">' + esc(action) + '</span></td>' +
-          '<td><div class="truncate" style="max-width:160px">' + esc(evt.rule_name || evt.deny_message || '—') + '</div></td>' +
-          '<td><span class="risk-bar"><span class="risk-bar-fill" style="width:' + (risk * 100).toFixed(0) + '%;background:' + riskColor + '"></span></span>' + risk.toFixed(2) + '</td>' +
-          '<td><div class="truncate" style="max-width:300px;color:var(--text-muted)">' + esc((evt.user_message || '').slice(0, 120)) + '</div></td>';
-
-        tr.addEventListener('click', () => showDetail(evt, tr));
-        feedBody.appendChild(tr);
-        updateEventCount();
-
-        if (doScroll !== false && autoScrollEl.checked) scrollFeed();
-      }
-
-      function scrollFeed() { requestAnimationFrame(() => { feedWrap.scrollTop = feedWrap.scrollHeight; }); }
-      function updateEventCount() {
-        const n = filteredEvents().length;
-        eventCountEl.textContent = n + ' event' + (n !== 1 ? 's' : '');
-      }
-
-      function resolveRisk(evt) {
-        const meta = evt.metadata || {};
-        if (typeof meta.risk_score === 'number') return meta.risk_score;
-        const nested = meta.ingress || meta.egress || {};
-        return (nested.detected && typeof nested.detected.risk_score === 'number')
-          ? nested.detected.risk_score : 0;
-      }
-
-      // ── Detail panel ──
-      function showDetail(evt, tr) {
-        feedBody.querySelectorAll('tr.selected').forEach(r => r.classList.remove('selected'));
-        if (tr) tr.classList.add('selected');
-        selectedEvent = evt;
-
-        const meta = evt.metadata || {};
-        const action = (evt.action || 'ALLOW').toUpperCase();
-        const risk = resolveRisk(evt);
-        const riskColor = risk < 0.3 ? 'var(--green)' : risk < 0.6 ? 'var(--amber)' : 'var(--red)';
-
-        // Flatten nested Lobstertrap signals
-        const signals = meta.ingress?.detected || meta.egress?.detected || meta;
-
-        let html = '';
-
-        // Overview
-        html += section('Overview',
-          grid([
-            ['Request ID', esc(evt.request_id || '—')],
-            ['Timestamp', esc(new Date(Number(evt.timestamp) > 1e12 ? Number(evt.timestamp) : Number(evt.timestamp) * 1000).toISOString())],
-            ['Model', esc(evt.model || '—')],
-            ['Direction', badge(evt.direction || 'ingress')],
-            ['Action', badge(action.toLowerCase(), action)],
-            ['Rule', esc(evt.rule_name || '—')],
-            ...(evt.blocked ? [['Blocked', '<span style="color:var(--red)">YES</span>']] : []),
-            ...(evt.deny_message ? [['Reason', esc(evt.deny_message)]] : []),
-          ])
-        );
-
-        // LLM Interaction — the key addition vs vanilla Lobstertrap
-        if (evt.user_message || evt.final_response) {
-          html += '<div class="detail-section"><h4>LLM Interaction</h4>';
-          if (evt.user_message) {
-            html += '<div class="msg-label">User Message</div>';
-            html += '<div class="msg-box">' + esc(evt.user_message) + '</div>';
-          }
-          if (evt.final_response) {
-            html += '<div class="msg-label">Response' + (evt.blocked ? ' (LLM-generated rejection)' : '') + '</div>';
-            html += '<div class="msg-box response">' + esc(evt.final_response) + '</div>';
-          }
-          html += '</div>';
+            } catch (err) { console.error('WS parse error', err); }
+          };
         }
 
-        // Classification
-        html += section('Classification',
-          grid([
-            ['Risk Score', '<span class="risk-bar" style="width:80px"><span class="risk-bar-fill" style="width:' + (risk * 100).toFixed(0) + '%;background:' + riskColor + '"></span></span> ' + risk.toFixed(3)],
-            ['Intent', esc(signals.intent_category || '—')],
-            ['Confidence', ((signals.intent_confidence || 0)).toFixed(3)],
-            ['Token Count', esc(signals.token_count || '—')],
-          ])
-        );
-
-        // DPI Signals
-        const dpiRows = [
-          ['Injection', signals.contains_injection_patterns],
-          ['Malware Request', signals.contains_malware_request],
-          ['Phishing/Fraud', signals.contains_phishing_patterns],
-          ['Harm/Violence', signals.contains_harm_patterns],
-          ['Data Exfiltration', signals.contains_exfiltration],
-          ['Obfuscation', signals.contains_obfuscation],
-          ['Role Impersonation', signals.contains_role_impersonation],
-          ['PII Request', signals.contains_pii_request],
-          ['PII (in text)', signals.contains_pii],
-          ['Credentials', signals.contains_credentials],
-          ['System Commands', signals.contains_system_commands],
-          ['Code', signals.contains_code],
-          ['File Paths', signals.contains_file_paths],
-          ['Sensitive Paths', signals.contains_sensitive_paths],
-          ['URLs', signals.contains_urls],
-        ].filter(([, v]) => v !== undefined);
-
-        if (dpiRows.length) {
-          html += section('DPI Signals',
-            grid(dpiRows.map(([name, val]) => [
-              name,
-              '<span style="color:' + (val ? 'var(--red)' : 'var(--green)') + '">' + (val ? 'YES' : 'no') + '</span>'
-            ]))
-          );
+        // ── Feed rendering ──
+        function filteredEvents() {
+          const sorted = [...events].sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+          return actionFilter ? sorted.filter(e => e.action === actionFilter) : sorted;
         }
 
-        // Extracted data
-        const tPaths = signals.target_paths || [];
-        const tDomains = signals.target_domains || [];
-        const tCmds = signals.target_commands || [];
-        if (tPaths.length || tDomains.length || tCmds.length) {
-          html += '<div class="detail-section"><h4>Extracted Data</h4>';
-          if (tPaths.length) html += tagGroup('Paths', tPaths);
-          if (tDomains.length) html += tagGroup('Domains', tDomains);
-          if (tCmds.length) html += tagGroup('Commands', tCmds);
-          html += '</div>';
+        function renderFeed() {
+          feedBody.innerHTML = '';
+          const filtered = filteredEvents();
+          feedEmpty.style.display = filtered.length === 0 ? 'flex' : 'none';
+          feedWrap.style.display = filtered.length > 0 ? 'block' : 'none';
+          filtered.forEach(evt => appendFeedRow(evt, false));
+          updateEventCount();
+          if (autoScrollEl.checked) scrollFeed();
         }
 
-        detailBody.innerHTML = html;
-        detailPanel.classList.add('open');
-      }
+        function appendFeedRow(evt, doScroll) {
+          if (actionFilter && evt.action !== actionFilter) return;
 
-      // ── HTML helpers ──
-      function section(title, content) {
-        return '<div class="detail-section"><h4>' + esc(title) + '</h4>' + content + '</div>';
-      }
-      function grid(rows) {
-        return '<div class="detail-grid">' +
-          rows.map(([l, v]) => '<div class="label">' + esc(l) + '</div><div class="value">' + v + '</div>').join('') +
-          '</div>';
-      }
-      function badge(cls, text) {
-        return '<span class="badge badge-' + esc(cls) + '">' + esc(text || cls.toUpperCase()) + '</span>';
-      }
-      function tagGroup(label, items) {
-        return '<div style="margin-bottom:8px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:4px">' + esc(label) + '</div>' +
-          '<div class="tag-list">' + items.map(i => '<span class="tag">' + esc(i) + '</span>').join('') + '</div></div>';
-      }
+          feedEmpty.style.display = 'none';
+          feedWrap.style.display = 'block';
 
-      // ── Stats ──
-      function renderStats() {
-        if (!stats) return;
-        const total = stats.total_requests || 0;
-        const blockPct = total > 0 ? ((stats.blocked_count / total) * 100).toFixed(1) : '0.0';
-        const allowPct = total > 0 ? ((stats.allowed_count / total) * 100).toFixed(1) : '0.0';
+          const risk = resolveRisk(evt);
+          const riskColor = risk < 0.3 ? 'var(--green)' : risk < 0.6 ? 'var(--amber)' : 'var(--red)';
 
-        document.getElementById('statsCards').innerHTML =
-          statCard('Total Requests', total, 'blue', '') +
-          statCard('Blocked', stats.blocked_count, 'red', blockPct + '% of total') +
-          statCard('Allowed', stats.allowed_count, 'green', allowPct + '% of total') +
-          statCard('Avg Risk Score', (+stats.avg_risk_score).toFixed(3), 'amber', riskLabel(stats.avg_risk_score));
+          const ts = Number(evt.timestamp);
+          const time = new Date(ts > 1e12 ? ts : ts * 1000);
+          const timeStr = isNaN(time.getTime()) ? '—' : time.toLocaleTimeString('en-US', { hour12: false });
 
-        const chart = document.getElementById('timelineChart');
-        chart.innerHTML = '';
-        if (stats.time_series && stats.time_series.length) {
-          const maxC = Math.max(1, ...stats.time_series.map(p => p.count));
-          stats.time_series.forEach(p => {
-            const ok = p.count - p.blocked;
-            const div = document.createElement('div');
-            div.className = 'timeline-bar';
-            div.title = p.count + ' requests (' + p.blocked + ' blocked)';
-            div.innerHTML =
-              '<div class="timeline-bar-blocked" style="height:' + ((p.blocked / maxC) * 100) + '%"></div>' +
-              '<div class="timeline-bar-ok"      style="height:' + ((ok / maxC) * 100) + '%"></div>';
-            chart.appendChild(div);
-          });
-        }
+          const action = (evt.action || 'ALLOW').toUpperCase();
+          const model = (evt.model || '').split('/').pop().split(':')[0]; // shorten long model names
 
-        renderBarChart('actionChart', stats.action_counts || {}, total, actionColor);
-        renderBarChart('intentChart', stats.intent_counts || {}, total, intentColor);
-
-        const histEl = document.getElementById('riskHistogram');
-        histEl.innerHTML = '';
-        const maxHist = Math.max(1, ...(stats.risk_histogram || [0]));
-        (stats.risk_histogram || []).forEach((count, i) => {
-          const col = document.createElement('div');
-          col.className = 'hist-col';
-          const bar = document.createElement('div');
-          bar.className = 'hist-bar ' + (i < 3 ? 'low' : i < 6 ? 'med' : 'high');
-          bar.style.height = ((count / maxHist) * 100) + '%';
-          bar.title = count + ' events';
-          col.appendChild(bar);
-          if (count > 0) {
-            const lbl = document.createElement('div');
-            lbl.className = 'hist-count';
-            lbl.textContent = count;
-            col.appendChild(lbl);
-          }
-          histEl.appendChild(col);
-        });
-
-        const tbody = document.querySelector('#topRulesTable tbody');
-        tbody.innerHTML = '';
-        const rulePairs = Object.entries(stats.rule_counts || {}).sort((a, b) => b[1] - a[1]);
-        const maxRule = rulePairs.length ? rulePairs[0][1] : 1;
-        rulePairs.slice(0, 8).forEach(([name, count]) => {
           const tr = document.createElement('tr');
-          tr.innerHTML = '<td><span class="rule-bar" style="width:' + ((count / maxRule) * 100) + '%"></span>' + esc(name) + '</td>' +
-            '<td style="text-align:right;font-weight:600">' + count + '</td>' +
-            '<td style="text-align:right;color:var(--text-muted);font-size:11px">' + (total > 0 ? ((count / total) * 100).toFixed(0) + '%' : '') + '</td>';
-          tbody.appendChild(tr);
-        });
-        if (!rulePairs.length) tbody.innerHTML = '<tr><td colspan="3" style="color:var(--text-muted)">No rules triggered yet</td></tr>';
-      }
+          tr.innerHTML =
+            '<td>' + esc(timeStr) + '</td>' +
+            '<td><div class="truncate" style="max-width:80px;color:var(--text-muted)">' + esc(model) + '</div></td>' +
+            '<td><span class="badge badge-' + esc((evt.direction || 'ingress').toLowerCase()) + '">' + esc(evt.direction || 'ingress') + '</span></td>' +
+            '<td><span class="badge badge-' + esc(action.toLowerCase()) + '">' + esc(action) + '</span></td>' +
+            '<td><div class="truncate" style="max-width:160px">' + esc(evt.rule_name || evt.deny_message || '—') + '</div></td>' +
+            '<td><span class="risk-bar"><span class="risk-bar-fill" style="width:' + (risk * 100).toFixed(0) + '%;background:' + riskColor + '"></span></span>' + risk.toFixed(2) + '</td>' +
+            '<td><div class="truncate" style="max-width:300px;color:var(--text-muted)">' + esc((evt.user_message || '').slice(0, 120)) + '</div></td>';
 
-      function statCard(label, value, color, sub) {
-        return '<div class="stat-card ' + color + '"><div class="stat-label">' + esc(label) +
-          '</div><div class="stat-value ' + color + '">' + value + '</div>' +
-          (sub ? '<div class="stat-sub">' + esc(sub) + '</div>' : '') + '</div>';
-      }
-      function riskLabel(s) {
-        return s < 0.2 ? 'Low risk' : s < 0.4 ? 'Moderate risk' : s < 0.6 ? 'Elevated risk' : 'High risk';
-      }
-      function renderBarChart(id, data, total, colorFn) {
-        const el = document.getElementById(id);
-        el.innerHTML = '';
-        const pairs = Object.entries(data).sort((a, b) => b[1] - a[1]);
-        const max = Math.max(1, ...(pairs.map(p => p[1])));
-        if (!pairs.length) { el.innerHTML = '<div style="color:var(--text-muted);font-size:12px;padding:8px 0">No data yet</div>'; return; }
-        pairs.forEach(([name, count]) => {
-          const div = document.createElement('div');
-          div.className = 'bar-row';
-          div.innerHTML =
-            '<div class="bar-label">' + esc(name) + '</div>' +
-            '<div class="bar-track"><div class="bar-fill" style="width:' + ((count / max) * 100) + '%;background:' + colorFn(name) + '"></div></div>' +
-            '<div class="bar-count">' + count + '</div>' +
-            '<div class="bar-pct">' + (total > 0 ? ((count / total) * 100).toFixed(0) : 0) + '%</div>';
-          el.appendChild(div);
-        });
-      }
-      function actionColor(a) {
-        return { ALLOW: 'var(--green)', DENY: 'var(--red)', LOG: 'var(--blue)', HUMAN_REVIEW: 'var(--amber)', QUARANTINE: 'var(--purple)', MODIFY: 'var(--cyan)', RATE_LIMIT: 'var(--amber)', REDIRECT: 'var(--blue)' }[a] || 'var(--teal)';
-      }
-      function intentColor(i) {
-        return { general: 'var(--blue)', credential_access: 'var(--red)', system: 'var(--amber)', code_execution: 'var(--purple)', network: 'var(--cyan)', file_io: 'var(--green)', data_access: 'var(--teal)' }[i] || 'var(--teal)';
-      }
+          tr.addEventListener('click', () => showDetail(evt, tr));
+          feedBody.appendChild(tr);
+          updateEventCount();
 
-      // ── Policy ──
-      function renderPolicy() {
-        if (!policyData) return;
-        const el = document.getElementById('policyContent');
-        let html = '<div class="policy-meta"><div class="detail-grid">';
-        html += '<div class="label">Policy Name</div><div class="value">' + esc(policyData.policy_name || '—') + '</div>';
-        html += '<div class="label">Version</div><div class="value">' + esc(policyData.version || '—') + '</div>';
-        html += '<div class="label">Default Action</div><div class="value">' + badge((policyData.default_action || 'allow').toLowerCase(), policyData.default_action || 'ALLOW') + '</div>';
-        html += '</div></div>';
-
-        ['ingress_rules', 'egress_rules'].forEach(key => {
-          html += '<h3>' + (key === 'ingress_rules' ? 'Ingress' : 'Egress') + ' Rules</h3>';
-          (policyData[key] || []).forEach(r => { html += ruleAccordion(r); });
-          if (!(policyData[key] || []).length) html += '<p style="color:var(--text-muted);margin-bottom:16px">No rules defined</p>';
-        });
-
-        el.innerHTML = html;
-        el.querySelectorAll('.rule-header').forEach(h => {
-          h.addEventListener('click', () => {
-            h.classList.toggle('expanded');
-            h.nextElementSibling.classList.toggle('expanded');
-          });
-        });
-      }
-
-      function ruleAccordion(rule) {
-        let html = '<div class="rule-accordion"><div class="rule-header"><span class="arrow">&#9654;</span>';
-        html += '<span class="rule-name">' + esc(rule.name) + '</span>';
-        html += badge(rule.action.toLowerCase(), rule.action);
-        html += '<span class="priority-badge">P' + rule.priority + '</span></div>';
-        html += '<div class="rule-body">';
-        if (rule.description) html += '<p>' + esc(rule.description) + '</p>';
-        if (rule.deny_message) html += '<p style="color:var(--red)">' + esc(rule.deny_message) + '</p>';
-        if (rule.conditions && rule.conditions.length) {
-          html += '<ul class="condition-list">';
-          rule.conditions.forEach(c => {
-            html += '<li><code>' + esc(c.field) + '</code> ' + esc(c.match_type) + ' <code>' + esc(String(c.value)) + '</code>';
-            if (c.negate) html += ' <span style="color:var(--amber)">(negated)</span>';
-            html += '</li>';
-          });
-          html += '</ul>';
+          if (doScroll !== false && autoScrollEl.checked) scrollFeed();
         }
-        html += '</div></div>';
-        return html;
-      }
 
-      function esc(s) {
-        if (s == null) return '';
-        const d = document.createElement('div');
-        d.textContent = String(s);
-        return d.innerHTML;
-      }
+        function scrollFeed() { requestAnimationFrame(() => { feedWrap.scrollTop = feedWrap.scrollHeight; }); }
+        function updateEventCount() {
+          const n = filteredEvents().length;
+          eventCountEl.textContent = n + ' event' + (n !== 1 ? 's' : '');
+        }
 
-      connect();
-    })();
-  </script>
+        function resolveRisk(evt) {
+          const meta = evt.metadata || {};
+          if (typeof meta.risk_score === 'number') return meta.risk_score;
+          const nested = meta.ingress || meta.egress || {};
+          return (nested.detected && typeof nested.detected.risk_score === 'number')
+            ? nested.detected.risk_score : 0;
+        }
+
+        // ── Detail panel ──
+        function showDetail(evt, tr) {
+          feedBody.querySelectorAll('tr.selected').forEach(r => r.classList.remove('selected'));
+          if (tr) tr.classList.add('selected');
+          selectedEvent = evt;
+
+          const meta = evt.metadata || {};
+          const action = (evt.action || 'ALLOW').toUpperCase();
+          const risk = resolveRisk(evt);
+          const riskColor = risk < 0.3 ? 'var(--green)' : risk < 0.6 ? 'var(--amber)' : 'var(--red)';
+
+          // Flatten nested Lobstertrap signals
+          const signals = meta.ingress?.detected || meta.egress?.detected || meta;
+
+          let html = '';
+
+          // Overview
+          html += section('Overview',
+            grid([
+              ['Request ID', esc(evt.request_id || '—')],
+              ['Timestamp', esc(new Date(Number(evt.timestamp) > 1e12 ? Number(evt.timestamp) : Number(evt.timestamp) * 1000).toISOString())],
+              ['Model', esc(evt.model || '—')],
+              ['Direction', badge(evt.direction || 'ingress')],
+              ['Action', badge(action.toLowerCase(), action)],
+              ['Rule', esc(evt.rule_name || '—')],
+              ...(evt.blocked ? [['Blocked', '<span style="color:var(--red)">YES</span>']] : []),
+              ...(evt.deny_message ? [['Reason', esc(evt.deny_message)]] : []),
+            ])
+          );
+
+          // LLM Interaction — the key addition vs vanilla Lobstertrap
+          if (evt.user_message || evt.final_response) {
+            html += '<div class="detail-section"><h4>LLM Interaction</h4>';
+            if (evt.user_message) {
+              html += '<div class="msg-label">User Message</div>';
+              html += '<div class="msg-box">' + esc(evt.user_message) + '</div>';
+            }
+            if (evt.final_response) {
+              html += '<div class="msg-label">Response' + (evt.blocked ? ' (LLM-generated rejection)' : '') + '</div>';
+              html += '<div class="msg-box response">' + esc(evt.final_response) + '</div>';
+            }
+            html += '</div>';
+          }
+
+          // Classification
+          html += section('Classification',
+            grid([
+              ['Risk Score', '<span class="risk-bar" style="width:80px"><span class="risk-bar-fill" style="width:' + (risk * 100).toFixed(0) + '%;background:' + riskColor + '"></span></span> ' + risk.toFixed(3)],
+              ['Intent', esc(signals.intent_category || '—')],
+              ['Confidence', ((signals.intent_confidence || 0)).toFixed(3)],
+              ['Token Count', esc(signals.token_count || '—')],
+            ])
+          );
+
+          // DPI Signals
+          const dpiRows = [
+            ['Injection', signals.contains_injection_patterns],
+            ['Malware Request', signals.contains_malware_request],
+            ['Phishing/Fraud', signals.contains_phishing_patterns],
+            ['Harm/Violence', signals.contains_harm_patterns],
+            ['Data Exfiltration', signals.contains_exfiltration],
+            ['Obfuscation', signals.contains_obfuscation],
+            ['Role Impersonation', signals.contains_role_impersonation],
+            ['PII Request', signals.contains_pii_request],
+            ['PII (in text)', signals.contains_pii],
+            ['Credentials', signals.contains_credentials],
+            ['System Commands', signals.contains_system_commands],
+            ['Code', signals.contains_code],
+            ['File Paths', signals.contains_file_paths],
+            ['Sensitive Paths', signals.contains_sensitive_paths],
+            ['URLs', signals.contains_urls],
+          ].filter(([, v]) => v !== undefined);
+
+          if (dpiRows.length) {
+            html += section('DPI Signals',
+              grid(dpiRows.map(([name, val]) => [
+                name,
+                '<span style="color:' + (val ? 'var(--red)' : 'var(--green)') + '">' + (val ? 'YES' : 'no') + '</span>'
+              ]))
+            );
+          }
+
+          // Extracted data
+          const tPaths = signals.target_paths || [];
+          const tDomains = signals.target_domains || [];
+          const tCmds = signals.target_commands || [];
+          if (tPaths.length || tDomains.length || tCmds.length) {
+            html += '<div class="detail-section"><h4>Extracted Data</h4>';
+            if (tPaths.length) html += tagGroup('Paths', tPaths);
+            if (tDomains.length) html += tagGroup('Domains', tDomains);
+            if (tCmds.length) html += tagGroup('Commands', tCmds);
+            html += '</div>';
+          }
+
+          detailBody.innerHTML = html;
+          detailPanel.classList.add('open');
+        }
+
+        // ── HTML helpers ──
+        function section(title, content) {
+          return '<div class="detail-section"><h4>' + esc(title) + '</h4>' + content + '</div>';
+        }
+        function grid(rows) {
+          return '<div class="detail-grid">' +
+            rows.map(([l, v]) => '<div class="label">' + esc(l) + '</div><div class="value">' + v + '</div>').join('') +
+            '</div>';
+        }
+        function badge(cls, text) {
+          return '<span class="badge badge-' + esc(cls) + '">' + esc(text || cls.toUpperCase()) + '</span>';
+        }
+        function tagGroup(label, items) {
+          return '<div style="margin-bottom:8px"><div style="color:var(--text-muted);font-size:11px;margin-bottom:4px">' + esc(label) + '</div>' +
+            '<div class="tag-list">' + items.map(i => '<span class="tag">' + esc(i) + '</span>').join('') + '</div></div>';
+        }
+
+
+        function esc(s) {
+          if (s == null) return '';
+          const d = document.createElement('div');
+          d.textContent = String(s);
+          return d.innerHTML;
+        }
+
+        connect();
+      })();
+    </script>
 </body>
 
 </html>
